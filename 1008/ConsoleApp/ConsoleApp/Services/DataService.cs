@@ -33,7 +33,7 @@ namespace ConsoleApp.Services
                     地址 = Address.ToString(),
                     連絡電話 = Telephone.ToString()                    
                 };
-                
+                result.Add(item);
             }
             cn.Close();
             return result;
@@ -58,6 +58,41 @@ VALUES(@ten_num_code,@name, @administrative_district, @address, @telephone)";
            
            cn.Close();
         }
+        public void Update(Medical_institution medical_Institution)
+        {
+            var commandString = @"
+UPDATE [dbo].[Medical_institution]
+   SET [ten_num_code] = ''
+      ,[name] = ''
+      ,[administrative_district] = 0
+      ,[address] = ''
+      ,[telephone] = ''
+WHERE id = 1";
 
+            SqlConnection cn = new SqlConnection(_connectionString);
+
+            cn.Open();
+
+            SqlCommand command = new SqlCommand(commandString, cn);
+            
+            var count = command.ExecuteNonQuery();
+
+            cn.Close();
+        }
+        public void Delete(int id)
+        {
+            var commandString = @"
+            DELETE FROM [dbo].[Medical_institution]
+            WHERE id=0";
+            SqlConnection cn = new SqlConnection(_connectionString);
+
+            cn.Open();
+
+            SqlCommand command = new SqlCommand(commandString, cn);
+
+            var count = command.ExecuteNonQuery();
+
+            cn.Close();
+        }
     }
 }

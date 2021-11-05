@@ -20,7 +20,7 @@ namespace ConsoleApp
 
             
             var rows = dataService.GetMedical_institution();
-
+            var groupDatas = csvDatas.GroupBy(x => x.行政區, y => y).ToList();
             Console.WriteLine(string.Format("分析完成，共有{0}筆資料", rows.Count));
             rows.ForEach(x =>
             {
@@ -33,7 +33,7 @@ namespace ConsoleApp
             var csvService = new ConsoleApp.Services.ImportCsvService();
             var csvDatas = csvService.LoadFormFile(fullfileName);
            
-            var groupDatas = csvDatas.GroupBy(x => x.行政區, y => y).ToList();
+            
             groupDatas.ForEach(x =>
             {
                 var items = x.ToList();
